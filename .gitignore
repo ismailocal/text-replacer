@@ -1,0 +1,42 @@
+# Composer dependencies
+/vendor/
+composer.lock
+
+# PHPUnit
+.phpunit.result.cache
+
+# IDE and Editor
+.idea/
+.vscode/
+
+# Temporary files
+*.log
+*.cache
+
+# PHP CS Fixer
+.php_cs.cache
+.php-cs-fixer.cache
+
+# PHP CS Fixer
+*.coverage
+*.coveragexml
+
+# IDE and Editor Files
+*.sublime-project
+*.sublime-workspace
+*.swp
+*.swo
+*~
+
+# System Files
+.DS_Store
+Thumbs.db
+
+# Build Outputs
+*.phar
+/build/
+/dist/
+
+# Other
+*.bak
+*.orig 

@@ -1,0 +1,29 @@
+{
+    "name": "ismailocal/text-replacer",
+    "description": "A PHP package for replacing text in directory and file contents",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "IsmailOcal\\TextReplacer\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "IsmailOcal\\TextReplacer\\Tests\\": "tests/"
+        }
+    },
+    "authors": [
+        {
+            "name": "İsmail Öcal",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.4"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^9.0"
+    },
+    "bin": ["bin/text-replacer"]
+} 

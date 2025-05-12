@@ -26,8 +26,10 @@ if (!is_dir($directory)) {
 
 try {
     $replacer = new TextReplacer($directory, $search, $replace);
-    $replacer->execute();
-    echo "Text replacement completed successfully.\n";
+    $changes = $replacer->execute();
+    echo "\nChanges made:\n";
+    echo $changes->toString() . "\n";
+    echo "\nText replacement completed successfully.\n";
 } catch (Exception $e) {
     echo "Error: {$e->getMessage()}\n";
     exit(1);

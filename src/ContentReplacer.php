@@ -5,12 +5,15 @@ namespace IsmailOcal\TextReplacer;
 class ContentReplacer
 {
     private array $excludedDirectories = ['vendor', 'node_modules', '.git'];
+    private ChangeLog $changeLog;
     
     public function __construct(
         private string $directory,
         private string $search,
         private string $replace
-    ) {}
+    ) {
+        $this->changeLog = new ChangeLog();
+    }
 
     /**
      * Set directories to exclude from content replacement
@@ -23,9 +26,10 @@ class ContentReplacer
     /**
      * Execute content replacement in files
      */
-    public function replace(): void
+    public function replace(): ChangeLog
     {
         $this->replaceInDirectory($this->directory);
+        return $this->changeLog;
     }
 
     /**
@@ -49,6 +53,7 @@ class ContentReplacer
             $newContent = str_replace($this->search, $this->replace, $content);
             if ($content !== $newContent) {
                 file_put_contents($path, $newContent);
+                $this->changeLog->addModifiedContent($path);
             }
         }
     }

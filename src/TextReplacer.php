@@ -28,9 +28,19 @@ class TextReplacer
     /**
      * Execute text replacement in directory and file contents
      */
-    public function execute(): void
+    public function execute(): ChangeLog
     {
-        $this->fileRenamer->rename();
-        $this->contentReplacer->replace();
+        $fileChanges = $this->fileRenamer->rename();
+        $contentChanges = $this->contentReplacer->replace();
+
+        $changeLog = new ChangeLog();
+        foreach ($fileChanges->getRenamedFiles() as $file) {
+            $changeLog->addRenamedFile($file['old'], $file['new']);
+        }
+        foreach ($contentChanges->getModifiedContents() as $file) {
+            $changeLog->addModifiedContent($file);
+        }
+
+        return $changeLog;
     }
 } 

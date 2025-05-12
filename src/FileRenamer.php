@@ -5,12 +5,15 @@ namespace IsmailOcal\TextReplacer;
 class FileRenamer
 {
     private array $excludedDirectories = ['vendor', 'node_modules', '.git'];
+    private ChangeLog $changeLog;
     
     public function __construct(
         private string $directory,
         private string $search,
         private string $replace
-    ) {}
+    ) {
+        $this->changeLog = new ChangeLog();
+    }
 
     /**
      * Set directories to exclude from file renaming
@@ -23,9 +26,10 @@ class FileRenamer
     /**
      * Execute file renaming in directory
      */
-    public function rename(): void
+    public function rename(): ChangeLog
     {
         $this->renameFilesInDirectory($this->directory);
+        return $this->changeLog;
     }
 
     /**
@@ -48,6 +52,7 @@ class FileRenamer
             $newPath = str_replace($this->search, $this->replace, $path);
             if ($path !== $newPath) {
                 rename($path, $newPath);
+                $this->changeLog->addRenamedFile($path, $newPath);
             }
         }
     }
